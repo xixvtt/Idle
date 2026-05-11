@@ -11,7 +11,7 @@ interface ThemePayload {
 
 contextBridge.exposeInMainWorld("idle", {
   daemonUrl: "ws://127.0.0.1:7777/ws",
-  version: "0.0.1",
+  version: "0.1.0",
   resize: (w: number, h: number) => ipcRenderer.send("idle:resize", w, h),
   setTheme: (pref: ThemePref) => ipcRenderer.send("idle:setTheme", pref),
   chooseTheme: (pref: ThemePref) =>

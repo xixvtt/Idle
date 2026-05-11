@@ -10,6 +10,7 @@ import {
 } from "electron";
 import * as path from "path";
 import * as fs from "fs";
+import { spawn, ChildProcess, execFile } from "child_process";
 
 const isDev = !!process.env.VITE_DEV_SERVER_URL;
 
@@ -53,6 +54,69 @@ let tray: Tray | null = null;
 let visible = true;
 let themePref: ThemePref = "system";
 let onboarded = false;
+let daemonProc: ChildProcess | null = null;
+
+function daemonPath(): string | null {
+  if (app.isPackaged) {
+    return path.join(process.resourcesPath, "daemon", "idle-daemon");
+  }
+  // Dev fallback: try the locally built binary, otherwise assume user runs
+  // `uv run idle-daemon serve` themselves.
+  const devBin = path.resolve(
+    __dirname,
+    "..",
+    "..",
+    "daemon",
+    "dist",
+    "idle-daemon",
+  );
+  return fs.existsSync(devBin) ? devBin : null;
+}
+
+function startDaemon() {
+  if (daemonProc) return;
+  const bin = daemonPath();
+  if (!bin) {
+    console.log("[idle] no bundled daemon — assuming user runs it manually");
+    return;
+  }
+  console.log("[idle] spawning daemon:", bin);
+  daemonProc = spawn(bin, ["serve"], {
+    stdio: ["ignore", "pipe", "pipe"],
+    detached: false,
+  });
+  daemonProc.stdout?.on("data", (b) => process.stdout.write(`[daemon] ${b}`));
+  daemonProc.stderr?.on("data", (b) => process.stderr.write(`[daemon] ${b}`));
+  daemonProc.on("exit", (code, sig) => {
+    console.log(`[idle] daemon exited code=${code} sig=${sig}`);
+    daemonProc = null;
+  });
+}
+
+function stopDaemon() {
+  if (!daemonProc) return;
+  try {
+    daemonProc.kill("SIGTERM");
+  } catch {
+    // ignore
+  }
+}
+
+function installHooks(): Promise<{ ok: boolean; output: string }> {
+  return new Promise((resolve) => {
+    const bin = daemonPath();
+    if (!bin) {
+      resolve({ ok: false, output: "no daemon binary" });
+      return;
+    }
+    execFile(bin, ["install-hooks"], (err, stdout, stderr) => {
+      resolve({
+        ok: !err,
+        output: (stdout || "") + (stderr || ""),
+      });
+    });
+  });
+}
 
 function createWindow() {
   const saved = loadWindowState();
@@ -183,6 +247,7 @@ app.whenReady().then(() => {
   themePref = saved.themePref ?? "system";
   onboarded = !!saved.onboarded;
 
+  startDaemon();
   createWindow();
   createTray();
 
@@ -211,9 +276,22 @@ app.whenReady().then(() => {
     saveWindowState({ themePref: pref, onboarded: true });
     pushTheme();
     rebuildMenu();
+    // First-launch onboarding also auto-installs hooks. Local-only,
+    // idempotent, makes a one-time backup at settings.json.bak.idle.
+    installHooks().then((r) => {
+      console.log("[idle] install-hooks:", r.output.trim());
+    });
   });
 });
 
 app.on("window-all-closed", () => {
   // Keep app alive via tray icon — do not quit.
+});
+
+app.on("before-quit", () => {
+  stopDaemon();
+});
+
+app.on("will-quit", () => {
+  stopDaemon();
 });

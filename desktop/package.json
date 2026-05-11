@@ -1,6 +1,6 @@
 {
   "name": "idle-desktop",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Idle Desktop — floating overlay for Claude Code sessions.",
   "main": "dist-electron/main.js",
   "license": "MIT",
@@ -22,6 +22,12 @@
       "dist/**/*",
       "dist-electron/**/*",
       "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../daemon/dist/idle-daemon",
+        "to": "daemon/idle-daemon"
+      }
     ],
     "mac": {
       "category": "public.app-category.developer-tools",
