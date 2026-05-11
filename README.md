@@ -24,11 +24,11 @@ No tab switching. No browser. No API key.
 
 ```
 ┌────────────────────────────┐
-│ ⚡ idle/daemon    RUNNING  │
-│ ⚡ stock-agent    RUNNING  │
-│ ⏸ algosnap       WAITING  │
+│ ⚡ session 1     RUNNING   │
+│ ⚡ session 2     RUNNING   │
+│ ⏸ session 3     WAITING   │
 ├────────────────────────────┤
-│ 1.87M today      +2.8k ↑   │
+│ 1.2M today      +2.8k ↑    │
 └────────────────────────────┘
 ```
 
