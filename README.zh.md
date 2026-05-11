@@ -1,6 +1,6 @@
 <div align="center">
 
-🌐 [English](README.md) | **中文** | [Español](README.es.md)
+🌐 [English](README.md) | **中文** | [Español](README.es.md) | [한국어](README.ko.md) | [Português](README.pt-BR.md)
 
 # Idle — Claude Code Token 监控器
 
