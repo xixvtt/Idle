@@ -37,7 +37,7 @@
       "icon": "build/icon.icns",
       "hardenedRuntime": false,
       "gatekeeperAssess": false,
-      "identity": null,
+      "identity": "-",
       "extendInfo": {
         "LSUIElement": 1
       },

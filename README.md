@@ -54,6 +54,22 @@ Download the latest release: **[Releases page →](https://github.com/xixvtt/Idl
 
 No Python, no terminal, no JSON edits. The bundled daemon and Claude Code hooks install themselves.
 
+### "Apple cannot verify Idle is free of malware" / "Idle is damaged"
+
+This is macOS Gatekeeper blocking unsigned apps. Run this in Terminal to clear the quarantine flag:
+
+```bash
+xattr -cr /Applications/Idle.app
+# or, if you unzipped it somewhere else:
+xattr -cr ~/Downloads/Idle.app
+```
+
+Then double-click `Idle.app` normally.
+
+If macOS still refuses, open **System Settings → Privacy & Security**, scroll to the bottom — you'll see "Idle was blocked…" with an **Open Anyway** button. Click it once.
+
+> Idle will be properly code-signed and notarized by Apple in a future release. The current build is unsigned because Apple Developer membership costs $99/year — once Idle has enough users, we'll cover that and these steps disappear.
+
 ## Requirements
 
 - macOS 12 or newer
