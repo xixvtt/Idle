@@ -43,40 +43,15 @@ Grab the latest zip from [Releases](https://github.com/xixvtt/Idle/releases):
 1. Double-click the zip to unpack `Idle.app`
 2. **Right-click `Idle.app` → Open → Open** (bypass Gatekeeper — the app is unsigned)
 3. Pick your theme on first launch
-4. Idle lives in your menu bar from here on
+4. Use Claude Code normally — Idle starts tracking immediately
+
+That's it. No Python, no terminal, no JSON edits — the bundled daemon and Claude Code hooks install themselves.
 
 ## Requirements
 
 - macOS 12+
-- [Claude Code](https://claude.com/claude-code) installed and running
-- Python 3.11+ *(temporary — daemon will be bundled into the app in the next release)*
+- [Claude Code](https://claude.com/claude-code) installed
 
-## Setup
+## Star this repo ⭐
 
-The daemon isn't bundled yet. Until the next release:
-
-```bash
-# 1. Clone and run the daemon
-git clone https://github.com/xixvtt/Idle.git
-cd Idle/daemon
-pip install uv      # if you don't have it
-uv sync
-uv run idle-daemon serve
-```
-
-```jsonc
-// 2. Add these hooks to ~/.claude/settings.json
-{
-  "hooks": {
-    "PreToolUse":        [{ "matcher": "*", "hooks": [{ "type": "command", "command": "curl -s -X POST http://127.0.0.1:7777/event -d @- || true", "async": true }] }],
-    "PostToolUse":       [{ "matcher": "*", "hooks": [{ "type": "command", "command": "curl -s -X POST http://127.0.0.1:7777/event -d @- || true", "async": true }] }],
-    "Stop":              [{ "matcher": "*", "hooks": [{ "type": "command", "command": "curl -s -X POST http://127.0.0.1:7777/event -d @- || true", "async": true }] }],
-    "PermissionRequest": [{ "matcher": "*", "hooks": [{ "type": "command", "command": "curl -s -X POST http://127.0.0.1:7777/event -d @- || true", "async": true }] }]
-  }
-}
-```
-
-```bash
-# 3. Launch Idle.app
-open /Applications/Idle.app   # or wherever you unzipped it
-```
+If Idle saves you time, please star the repo — it's the single biggest signal that helps more developers find this project. Issues, PRs, and feedback are all welcome.
