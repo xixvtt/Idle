@@ -2,8 +2,7 @@
 
 # Idle
 
-**Floating ambient display for Claude Code.**
-See your sessions and today's token usage at a glance — without alt-tabbing.
+**Real-time monitor for your Claude Code usage.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/xixvtt/Idle?include_prereleases)](https://github.com/xixvtt/Idle/releases)
@@ -15,13 +14,13 @@ See your sessions and today's token usage at a glance — without alt-tabbing.
 
 ## What is this?
 
-Idle is a tiny translucent capsule that sits in the corner of your screen. It quietly watches your Claude Code sessions and shows you:
+Idle is a tiny translucent capsule that sits in the corner of your screen and tracks your Claude Code usage in real time:
 
-- **Today's total token usage** — across all sessions, all projects
-- **Live session list** — which projects are running, waiting, or idle
-- **Done alerts** — know the moment Claude finishes a task
+- **Today's total token usage** — live, across every session and project
+- **Active session list** — which workspaces are running, waiting, or idle right now
+- **Done alerts** — the moment Claude finishes a task
 
-No tab switching. No browser. No API key. Just glanceable info.
+No tab switching. No browser. No API key.
 
 ```
 ┌────────────────────────────┐
