@@ -1,5 +1,7 @@
 <div align="center">
 
+🌐 **English** | [中文](README.zh.md)
+
 # Idle — Claude Code Token Monitor
 
 **A real-time token usage monitor and session tracker for [Claude Code](https://claude.com/claude-code) on macOS.**
