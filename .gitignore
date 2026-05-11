@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.uv/
+uv.lock
+dist/
+build/
+*.spec
+
+# Node / Electron
+node_modules/
+desktop/dist/
+desktop/dist-electron/
+desktop/out/
+desktop/release/
+*.log
+.DS_Store
+**/.DS_Store
+
+# Idle runtime
+.idle/
+
+# Editor
+.vscode/
+.idea/
+*.swp
