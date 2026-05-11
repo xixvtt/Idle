@@ -4,9 +4,8 @@
 
 **Real-time monitor for your Claude Code usage.**
 
+[![Last commit](https://img.shields.io/github/last-commit/xixvtt/Idle)](https://github.com/xixvtt/Idle/commits/main)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/xixvtt/Idle?include_prereleases)](https://github.com/xixvtt/Idle/releases)
-[![macOS](https://img.shields.io/badge/macOS-12%2B-black?logo=apple)](#install)
 
 </div>
 
@@ -23,13 +22,13 @@ Idle is a tiny translucent capsule that sits in the corner of your screen and tr
 No tab switching. No browser. No API key.
 
 ```
-┌────────────────────────────┐
-│ ⚡ session 1     RUNNING   │
-│ ⚡ session 2     RUNNING   │
-│ ⏸ session 3     WAITING   │
-├────────────────────────────┤
-│ 1.2M today      +2.8k ↑    │
-└────────────────────────────┘
+┌─────────────────────────────┐
+│ session 1           RUNNING │
+│ session 2           RUNNING │
+│ session 3           WAITING │
+├─────────────────────────────┤
+│ 1.2M today         +2.8k up │
+└─────────────────────────────┘
 ```
 
 ## Install
